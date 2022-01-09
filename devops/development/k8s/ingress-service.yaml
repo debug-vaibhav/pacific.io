@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: pacific.io
+      http:
+        paths:
+          - path: "/user"
+            backend:
+              service:
+                serviceName: user-service
+                servicePort: 5000

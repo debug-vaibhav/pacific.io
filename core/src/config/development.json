@@ -1,0 +1,10 @@
+{
+    "port": 4002,
+    "rabbitmq": "amqp://localhost",
+    "databaseHost": "localhost",
+    "databasePort": 1433,
+    "databaseUsername": "root",
+    "databasePassword": "zaq1@WSX",
+    "databaseName": "core",
+    "jwtSecretKey": "1234.qwer"
+}

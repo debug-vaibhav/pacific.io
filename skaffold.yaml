@@ -1,0 +1,37 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+    kubectl:
+        manifests:
+            - ./devops/development/k8s/sql-server-deployment.yaml
+            - ./devops/development/k8s/rabbitmq-deployment.yaml
+            - ./devops/development/k8s/user-deployment.yaml
+            - ./devops/development/k8s/core-deployment.yaml
+build:
+    local:
+        push: false
+    artifacts:
+        # - image: pacific/client
+        #   context: client
+        #   docker:
+        #       dockerfile: Dockerfile
+        #   sync:
+        #       manual:
+        #           - src: 'src/**/*.js'
+        #             dest: .
+        - image: bvaibhav95/pacific-user
+          context: user
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: 'src/**/*.ts'
+                    dest: .
+        - image: bvaibhav95/pacific-core
+          context: core
+          docker:
+              dockerfile: Dockerfile
+          sync:
+              manual:
+                  - src: 'src/**/*.ts'
+                    dest: .

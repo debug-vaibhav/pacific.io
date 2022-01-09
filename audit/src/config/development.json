@@ -1,0 +1,12 @@
+{
+    "protocol": "http",
+    "host": "localhost",
+    "port": "4001",
+    "amqp": "amqp://localhost",
+    "databaseHost": "localhost",
+    "databaseInstanceName": "SQLEXPRESS",
+    "databaseName": "audit",
+    "databaseUsername": "root",
+    "databasePassword": "zaq1@WSX",
+    "jwtSecretKey": "1234.qwer"
+}

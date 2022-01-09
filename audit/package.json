@@ -1,0 +1,31 @@
+{
+    "name": "audit",
+    "version": "1.0.0",
+    "description": "this is an audit microservice for entire application",
+    "main": "app.js",
+    "scripts": {
+        "start": "./node_modules/.bin/cross-env NODE_CONFIG_DIR=./src/config NODE_ENV=development ./node_modules/.bin/ts-node-dev --ignore ./node_modules/* ./src/application.ts",
+        "prod": "./node_modules/.bin/cross-env NODE_CONFIG_DIR=./src/config NODE_ENV=production ./node_modules/.bin/nodemon --ignore ./node_modules/* ./dist/application.js"
+    },
+    "keywords": [
+        "audit"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/amqplib": "^0.5.17",
+        "@types/config": "0.0.37",
+        "@types/sequelize": "^4.28.9",
+        "@types/tedious": "^4.0.3",
+        "amqplib": "^0.6.0",
+        "config": "^3.3.3",
+        "sequelize": "^6.3.5",
+        "tedious": "^9.2.1",
+        "typescript": "^4.1.3"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "nodemon": "^2.0.6",
+        "ts-node-dev": "^1.1.1"
+    }
+}

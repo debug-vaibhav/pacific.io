@@ -1,0 +1,6 @@
+{
+    "port": 4003,
+    "rabbitmq": "amqp://localhost",
+    "logPath": "D:/repos/pacific.io/logging/logs",
+    "services": ["user", "core", "monitor", "notification", "audit"]
+}

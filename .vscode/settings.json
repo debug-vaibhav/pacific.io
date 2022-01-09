@@ -1,0 +1,7 @@
+{
+    "files.eol": "\r\n",
+    "emmet.includeLanguages": {
+        "typescript": "typescript"
+    },
+    "typescript.tsdk": "node_modules\\typescript\\lib"
+}

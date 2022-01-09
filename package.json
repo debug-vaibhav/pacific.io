@@ -1,0 +1,60 @@
+{
+    "name": "pacific.io",
+    "version": "1.0.0",
+    "description": "pacific.io application",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "install-dependencies": "npm install",
+        "go-to-audit": "cd audit",
+        "audit-install": "./node_modules/.bin/npm-run-all go-to-audit install-dependencies",
+        "go-to-user": "cd user",
+        "user-install": "./node_modules/.bin/npm-run-all go-to-user install-dependencies",
+        "go-to-web": "cd web",
+        "web-install": "./node_modules/.bin/npm-run-all go-to-web install-dependencies",
+        "go-to-client": "cd client",
+        "client-install": "./node_modules/.bin/npm-run-all go-to-client install-dependencies",
+        "go-to-core": "cd core",
+        "core-install": "./node_modules/.bin/npm-run-all go-to-core install-dependencies",
+        "go-to-monitor": "cd monitor",
+        "monitor-install": "./node_modules/.bin/npm-run-all go-to-monitor install-dependencies",
+        "go-to-notification": "cd notification",
+        "notification-install": "./node_modules/.bin/npm-run-all go-to-notification install-dependencies",
+        "install-all-dependencies": "./node_modules/.bin/npm-run-all install-dependencies audit-install user-install client-install core-install monitor-install notification-install",
+        "database-pvc": "kubectl apply -f devops/development/k8s/database-pvc.yaml",
+        "rabbitmq-pvc": "kubectl apply -f devops/development/k8s/rabbitmq-pvc.yaml",
+        "sql-server-deployment": "kubectl apply -f devops/development/k8s/sql-server-deployment.yaml",
+        "rabbitmq-deployment": "kubectl apply -f devops/development/k8s/rabbitmq-deployment.yaml",
+        "redis-deployment": "kubectl apply -f devops/development/k8s/redis-deployment.yaml",
+        "sql-server-deployment-stop": "kubectl delete deploy sql-server-deployment",
+        "rabbitmq-deployment-stop": "kubectl delete statefulset rabbitmq",
+        "redis-deployment-stop": "kubectl delete deploy redis-deployment",
+        "deploy": "./node_modules/.bin/npm-run-all database-pvc rabbitmq-pvc sql-server-deployment rabbitmq-deployment redis-deployment",
+        "undeploy": "./node_modules/.bin/npm-run-all sql-server-deployment-stop rabbitmq-deployment-stop redis-deployment-stop"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://bvaibhav95@bitbucket.org/bvaibhav95/pacific.io.git"
+    },
+    "keywords": [
+        "microservices"
+    ],
+    "author": "",
+    "license": "ISC",
+    "homepage": "https://bitbucket.org/bvaibhav95/pacific.io#readme",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.26.0",
+        "@typescript-eslint/parser": "^4.26.0",
+        "eslint": "^7.27.0",
+        "eslint-config-airbnb-typescript": "^12.3.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "npm-run-all": "^4.1.5",
+        "prettier": "^2.3.0",
+        "typescript": "^4.3.2"
+    },
+    "dependencies": {}
+}

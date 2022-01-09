@@ -1,0 +1,110 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/common';
+
+.textarea-common {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+    line-height: 1.6;
+    font-size: 1.05rem;
+    border: none;
+    resize: none;
+    overflow: hidden;
+}
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.data-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    border-radius: 0.8rem;
+    margin-top: 1.5rem;
+    padding: 1.5rem 2rem;
+}
+.step-data-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.5rem 0rem;
+    .details-container {
+        .job-name-field {
+            margin-bottom: 2rem;
+            width: 40%;
+        }
+        .job-description-field {
+            @extend .textarea-common;
+            margin-bottom: 2rem;
+            width: 40%;
+            background-color: $white;
+        }
+    }
+    .editor-container {
+        display: flex;
+        height: 100%;
+        .line-number-container {
+            width: 100%;
+            min-width: max-content;
+            max-width: max-content;
+            padding: 1rem 0rem;
+            textarea {
+                @extend .textarea-common;
+                width: 100%;
+                height: 100%;
+                background-color: $white;
+            }
+        }
+        .text-container {
+            flex: 1;
+            background-color: $primary-grey-6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            textarea {
+                @extend .textarea-common;
+                background-color: $primary-grey-6;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .config-container {
+        .job-source-selector {
+            margin-bottom: 1rem;
+        }
+        .job-sink-selector {
+            margin-bottom: 1rem;
+        }
+        .job-sources-container {
+            margin-bottom: 2rem;
+        }
+        .job-sinks-container {
+            margin-bottom: 2rem;
+        }
+        .selected-source-chip {
+            margin: 0rem 0.5rem 0.5rem 0rem;
+        }
+    }
+    .execution-container {
+        .cron-field {
+            width: 40%;
+        }
+    }
+}
+.action-btns {
+    border-radius: 0.5rem;
+    height: 2.7rem;
+    font-size: 1rem;
+}
+.action-container {
+    .create-btn {
+        @extend .action-btns;
+        margin-right: 1rem;
+    }
+    .reset-btn {
+        @extend .action-btns;
+    }
+}

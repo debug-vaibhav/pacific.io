@@ -1,0 +1,12 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/common';
+
+.container {
+    .breadcrumb {
+        font-size: 1.2rem;
+        .subpath {
+            font-weight: 600;
+            color: $primary-red;
+        }
+    }
+}

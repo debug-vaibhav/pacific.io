@@ -1,0 +1,24 @@
+@import '../../assets/styles/variables';
+
+.auth-container {
+    display: flex;
+}
+
+.cover-container {
+    flex: 1;
+    height: 100vh;
+    width: 100%;
+    img {
+        width: 100%;
+        height: 100%;
+        padding: 5rem 5rem;
+    }
+}
+
+.form-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
