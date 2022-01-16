@@ -1,0 +1,18 @@
+{
+    "service": "worker",
+    "port": 4004,
+    "rabbitmq": "amqp://localhost",
+    "databaseHost": "localhost",
+    "databasePort": 1433,
+    "databaseUsername": "root",
+    "databasePassword": "zaq1@WSX",
+    "databaseName": "worker",
+    "jwtSecretKey": "1234.qwer",
+    "log": {
+        "enable": true,
+        "path": "D:/repos/pacific.io/worker/logs",
+        "archieve": "30d",
+        "maxFileSize": "10",
+        "zippedArchieve": false
+    }
+}

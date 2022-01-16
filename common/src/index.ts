@@ -9,7 +9,6 @@ export * from './events/producer';
 export * from './events/events';
 export * from './events/exchanges';
 export * from './events/queues';
-export * from './resources/rabbitmq-transport';
 export * from './middlewares/auth';
 export * from './middlewares/cors';
 export * from './middlewares/error';

@@ -5,8 +5,8 @@ deploy:
         manifests:
             - ./devops/development/k8s/sql-server-deployment.yaml
             - ./devops/development/k8s/rabbitmq-deployment.yaml
-            - ./devops/development/k8s/user-deployment.yaml
-            - ./devops/development/k8s/core-deployment.yaml
+            - ./devops/development/k8s/web-deployment.yaml
+            - ./devops/development/k8s/worker-deployment.yaml
 build:
     local:
         push: false
@@ -19,16 +19,16 @@ build:
         #       manual:
         #           - src: 'src/**/*.js'
         #             dest: .
-        - image: bvaibhav95/pacific-user
-          context: user
+        - image: bvaibhav95/pacific-web
+          context: web
           docker:
               dockerfile: Dockerfile
           sync:
               manual:
                   - src: 'src/**/*.ts'
                     dest: .
-        - image: bvaibhav95/pacific-core
-          context: core
+        - image: bvaibhav95/pacific-worker
+          context: worker
           docker:
               dockerfile: Dockerfile
           sync:

@@ -34,7 +34,11 @@ export class RabbitMQ {
     }
 
     public async connect(url: string): Promise<void> {
-        this._connection = await amqp.connect(url);
+        try {
+            this._connection = await amqp.connect(url);
+        } catch (error) {
+            process.exit();
+        }
         this._channel = await this._connection.createChannel();
     }
 }

@@ -30,6 +30,7 @@
         "sequelize": "^6.6.5",
         "tedious": "^11.8.0",
         "winston": "^3.3.3",
+        "winston-daily-rotate-file": "^4.5.5",
         "winston-transport": "^4.4.0"
     },
     "devDependencies": {

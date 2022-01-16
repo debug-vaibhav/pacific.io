@@ -1,21 +1,27 @@
-import winston from 'winston';
+import winston, { format } from 'winston';
 import Transport from 'winston-transport';
-import { CONSTANTS } from '../constants/constants';
 
 export class Logger {
     private static instance: Logger;
     private _metadata?: any;
     private _logger: winston.Logger;
     private _service: string;
-    private _transports: Transport[];
+    private _transports: Transport[] = [];
 
     private constructor(service: string) {
         this._service = service;
-        this._transports = [
+        this._transports.push(
             new winston.transports.Console({
-                format: CONSTANTS.LOGGER_COMBINE(CONSTANTS.LOGGER_LABEL({ label: this._service }), CONSTANTS.LOGGER_TIMESTAMP(), winston.format.colorize(), CONSTANTS.LOGGER_CUSTOMFORMAT),
-            }),
-        ];
+                format: format.combine(
+                    format.label({ label: this._service }),
+                    format.timestamp(),
+                    winston.format.colorize(),
+                    format.printf(({ level, message, label, timestamp }) => {
+                        return `${timestamp} ${label} [${level}]: ${message}`;
+                    })
+                ),
+            })
+        );
         this._logger = winston.createLogger({ transports: this._transports });
     }
 
