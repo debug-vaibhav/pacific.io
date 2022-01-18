@@ -1,9 +1,9 @@
-import User from '../models/dto/user';
+import { UserPayload } from '../models/dto/req-user';
 
 declare global {
     namespace Express {
         interface Request {
-            user: User;
+            user: UserPayload;
         }
     }
 }

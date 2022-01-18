@@ -13,7 +13,7 @@ export default class Boot {
             .listen(port, () => {
                 Boot.LOGGER.warn(`Web microservice running. Visit http://localhost:${port}`);
             })
-            .on('error', () => {
+            .on('error', (error) => {
                 Boot.LOGGER.info(Errors.APP_ERROR.description, ':', Errors.APP_ERROR.description);
             });
     }

@@ -1,8 +1,12 @@
-import JobDto from '../models/dto/job';
-import Job from '../models/dao/job';
-import { CrudService } from '@pacific.io/common';
+import { CrudService, JobDto } from '@pacific.io/common';
+import Job from '../models/job';
 
 export default class JobService implements CrudService {
+    public async getAll(): Promise<Array<JobDto>> {
+        const jobs: Job[] = await Job.findAll({ where: { isDeleted: false } });
+        return <JobDto[]>jobs;
+    }
+
     public async get(limit: number, offset: number): Promise<Array<JobDto>> {
         const jobs: Job[] = await Job.findAll({ offset, limit, where: { isDeleted: false } });
         return <JobDto[]>jobs;

@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { CreateError, UpdateError, NotExistsError, DeleteError } from '@pacific.io/common';
+import { CreateError, UpdateError, NotExistsError, DeleteError, JobDto } from '@pacific.io/common';
 import JobService from '../services/job';
-import JobDto from '../models/dto/job';
 
 export default class JobController {
     private static jobService: JobService = new JobService();

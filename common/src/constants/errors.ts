@@ -1,4 +1,4 @@
-import IError from '../models/interfaces/error';
+import { IError } from '../models/interfaces/error';
 
 export class Errors {
     static GENERAL: IError = {

@@ -1,13 +1,13 @@
 import { Logger } from 'winston';
 import { Errors } from '@pacific.io/common';
 import { LoggerInstance } from '../resources/logger';
-import User from '../models/dao/user';
-import Job from '../models/dao/job';
-import Source from '../models/dao/source';
-import SourceType from '../models/dao/source-type';
-import JobSource from '../models/dao/job-source';
-import JobScheduler from '../models/dao/job-scheduler';
-import JobExecution from '../models/dao/job-execution';
+import User from '../models/user';
+import Job from '../models/job';
+import Source from '../models/source';
+import SourceType from '../models/source-type';
+import JobSource from '../models/job-source';
+import JobScheduler from '../models/job-scheduler';
+import JobExecution from '../models/job-execution';
 
 export default class Migration {
     private static LOGGER: Logger = LoggerInstance.logger;

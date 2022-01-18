@@ -1,14 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
-import { CreateError, UpdateError, NotExistsError, DeleteError } from '@pacific.io/common';
+import { Logger } from 'winston';
+import { CreateError, UpdateError, NotExistsError, DeleteError, Events, SourceDto } from '@pacific.io/common';
 import SourceService from '../services/source';
-import SourceDto from '../models/dto/source';
+import { LoggerInstance } from '../resources/logger';
+import { WorkerProducer } from '../events/producers/worker-producer';
+import { WorkerEvent } from '../events/worker-event';
 
 export default class SourceController {
+    private static LOGGER: Logger = LoggerInstance.logger;
     private static sourceService: SourceService = new SourceService();
+    private static workerProducer: WorkerProducer = new WorkerProducer();
 
-    public static async get(req: Request, res: Response, next: NextFunction): Promise<void> {
+    public static async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const sources: SourceDto[] = await SourceController.sourceService.get(0, 100);
+            const sources: SourceDto[] = await SourceController.sourceService.getAll();
             res.json({ message: 'Datasources fetched successfully', data: sources });
         } catch (error) {
             next(new NotExistsError('Source', error));
@@ -28,6 +33,8 @@ export default class SourceController {
         try {
             const sourceDto: SourceDto = req.body;
             await SourceController.sourceService.create(sourceDto);
+            const event: WorkerEvent = new WorkerEvent(Events.SourceCreated, sourceDto);
+            await SourceController.workerProducer.publish(event);
             res.json({ message: 'Datasource created successfully', data: sourceDto });
         } catch (error) {
             next(new CreateError('Source', error));
@@ -36,8 +43,10 @@ export default class SourceController {
 
     public static async updateById(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const source: SourceDto | null = await SourceController.sourceService.updateById(req.params.id, req.body);
-            res.json({ message: 'Datasource updated successfully', data: source });
+            const sourceDto: SourceDto | null = await SourceController.sourceService.updateById(req.params.id, req.body);
+            const event: WorkerEvent = new WorkerEvent(Events.SourceUpdated, sourceDto);
+            await SourceController.workerProducer.publish(event);
+            res.json({ message: 'Datasource updated successfully', data: sourceDto });
         } catch (error) {
             next(new UpdateError('Source', error));
         }
@@ -45,8 +54,10 @@ export default class SourceController {
 
     public static async deleteById(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const source: SourceDto | null = await SourceController.sourceService.deleteById(req.params.id);
-            res.json({ message: 'Datasource deleted successfully', data: source });
+            const sourceDto: SourceDto | null = await SourceController.sourceService.deleteById(req.params.id);
+            const event: WorkerEvent = new WorkerEvent(Events.SourceDeleted, sourceDto);
+            await SourceController.workerProducer.publish(event);
+            res.json({ message: 'Datasource deleted successfully', data: sourceDto });
         } catch (error) {
             next(new DeleteError('Source', error));
         }

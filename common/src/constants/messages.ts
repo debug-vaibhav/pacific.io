@@ -1,4 +1,4 @@
-import IMessage from '../models/interfaces/message';
+import { IMessage } from '../models/interfaces/message';
 
 export class Messages {
     static SERVICE_LIVE: IMessage = {

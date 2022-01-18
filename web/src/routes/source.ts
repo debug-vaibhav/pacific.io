@@ -5,7 +5,7 @@ export default class SourceRouter {
     private static router: Router = Router();
 
     getRouter(): Router {
-        SourceRouter.router.get('/', SourceController.get);
+        SourceRouter.router.get('/', SourceController.getAll);
         SourceRouter.router.get('/:id', SourceController.getById);
         SourceRouter.router.post('/', SourceController.create);
         SourceRouter.router.put('/:id', SourceController.updateById);

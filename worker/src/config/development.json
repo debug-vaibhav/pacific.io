@@ -1,6 +1,6 @@
 {
     "service": "worker",
-    "port": 4004,
+    "port": 4001,
     "rabbitmq": "amqp://localhost",
     "databaseHost": "localhost",
     "databasePort": 1433,
