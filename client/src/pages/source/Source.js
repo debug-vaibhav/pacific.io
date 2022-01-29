@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch, faEllipsisH, faPlusCircle, faFilter } from '@fortawesome/free-solid-svg-icons';
 import Breadcrumb from '../../components/ui/breadcrumb/Breadcrumb';
 import { InputRounded, Button, ButtonOutlined, Chip, CheckBox } from '../../components/custom/components';
 import Pagination from '../../components/ui/pagination/Pagination';
+import ToasterContext from '../../contexts/toaster-context';
 import styles from './source.scss';
 
 const Source = (props) => {
@@ -14,6 +15,7 @@ const Source = (props) => {
     const page = queryParams.get('page');
     const [pageNumber, setPageNumber] = useState(parseInt(page) || 1);
     const [sources, setSources] = useState([]);
+    const toasterContext = useContext(ToasterContext);
     useEffect(() => {
         let arr = [];
         for (let i = 0; i < 9; i++) {
@@ -79,11 +81,24 @@ const Source = (props) => {
                 <div className={styles['search-container']}>
                     <InputRounded type="text" placeholder="search data sources" overriddenStyles={styles['search-input']} />
                     <div className={styles['action-container']}>
-                        <ButtonOutlined title="FILTER" icon={<FontAwesomeIcon icon={faFilter} className={styles['filter-icon']} />} styles={styles['new-btn']} />
+                        <ButtonOutlined
+                            title="FILTER"
+                            icon={<FontAwesomeIcon icon={faFilter} className={styles['filter-icon']} />}
+                            styles={styles['new-btn']}
+                            onClick={() => {
+                                toasterContext.addToast('warning', 'Feature not available');
+                            }}
+                        />
                         <Link to="/source/new">
                             <Button title="NEW DATA SOURCE" icon={<FontAwesomeIcon icon={faPlusCircle} className={styles['add-icon']} />} styles={styles['new-btn']} />
                         </Link>
-                        <ButtonOutlined icon={<FontAwesomeIcon icon={faEllipsisH} className={styles['more-icon']} />} styles={styles['extra-btn']} />
+                        <ButtonOutlined
+                            icon={<FontAwesomeIcon icon={faEllipsisH} className={styles['more-icon']} />}
+                            styles={styles['extra-btn']}
+                            onClick={() => {
+                                toasterContext.addToast('warning', 'Feature not available');
+                            }}
+                        />
                     </div>
                 </div>
                 <div className={styles['table-container']}>{tableRows()}</div>

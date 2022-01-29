@@ -38,6 +38,14 @@ const Breadcrumb = () => {
             path = 'Monitoring';
             subPath = 'View Jobs';
             break;
+        case pathname === '/admin':
+            path = 'Admin';
+            subPath = 'View users';
+            break;
+        case pathname === '/admin/new':
+            path = 'Admin';
+            subPath = 'Add User';
+            break;
         default:
             path = 'Sources';
             subPath = 'View Data Sources';

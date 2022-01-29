@@ -18,36 +18,36 @@ const renderContent = (title, icon) => {
 };
 
 export const Button = (props) => {
-    const { icon, title, onClick, name, disabled } = props;
+    const { icon, title, onClick, name, type, disabled } = props;
     return (
-        <button className={`${styles['btn-primary']} ${props.styles}`} onClick={onClick} name={name} disabled={disabled}>
+        <button className={`${styles['btn-primary']} ${props.styles}`} onClick={onClick} name={name} type={type} disabled={disabled}>
             {renderContent(title, icon)}
         </button>
     );
 };
 
 export const ButtonOutlined = (props) => {
-    const { icon, title, onClick, name, disabled } = props;
+    const { icon, title, onClick, name, type, disabled } = props;
     return (
-        <button className={`${styles['btn-outlined']} ${props.styles}`} onClick={onClick} name={name} disabled={disabled}>
+        <button className={`${styles['btn-outlined']} ${props.styles}`} onClick={onClick} name={name} type={type} disabled={disabled}>
             {renderContent(title, icon)}
         </button>
     );
 };
 
 export const ButtonLight = (props) => {
-    const { icon, title, onClick, name, disabled } = props;
+    const { icon, title, onClick, name, type, disabled } = props;
     return (
-        <button className={`${styles['btn-light']} ${props.styles}`} onClick={onClick} name={name} disabled={disabled}>
+        <button className={`${styles['btn-light']} ${props.styles}`} onClick={onClick} name={name} type={type} disabled={disabled}>
             {renderContent(title, icon)}
         </button>
     );
 };
 
 export const ButtonCircled = (props) => {
-    const { icon, title, onClick, name, disabled } = props;
+    const { icon, title, onClick, name, type, disabled } = props;
     return (
-        <button className={`${styles['btn-circled']} ${props.styles}`} onClick={onClick} name={name} disabled={disabled}>
+        <button className={`${styles['btn-circled']} ${props.styles}`} onClick={onClick} name={name} type={type} disabled={disabled}>
             {renderContent(title, icon)}
         </button>
     );

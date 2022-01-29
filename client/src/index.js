@@ -15,7 +15,9 @@ import Audit from './pages/audit/Audit';
 import Monitor from './pages/monitor/Monitor';
 import Data from './pages/monitor/Data';
 import Configuration from './pages/configuration/Configuration';
-import Admin from './pages/admin/Admin';
+import User from './pages/admin/User';
+import Role from './pages/admin/Role';
+import Permission from './pages/admin/Permission';
 import Integration from './pages/integration/Integration';
 import NewJob from './pages/job/NewJob';
 import Error from './components/ui/error/Error';
@@ -23,6 +25,7 @@ import Error from './components/ui/error/Error';
 import { Toaster } from './components/custom/components';
 
 import ToasterContext, { ToasterContextProvider } from './contexts/toaster-context';
+import { AuthContextProvider } from './contexts/auth-context';
 
 import './assets/styles/custom.scss';
 
@@ -35,28 +38,32 @@ const App = () => {
                 return <Toaster key={id} id={id} status={status} message={message} />;
             })}
             <Router>
-                <Routes>
-                    <Route path="/auth" element={<Auth />}>
-                        <Route path="login" element={<Login />} />
-                        <Route path="register" element={<Register />} />
-                    </Route>
-                    <Route path="/" element={<Main />}>
-                        <Route path="" element={<Dashboard />} />
-                        <Route path="dashboard" element={<Dashboard />} />
-                        <Route path="source" element={<Source />} />
-                        <Route path="source/new" element={<NewSource />} />
-                        <Route path="sink" element={<Sink />} />
-                        <Route path="job" element={<Job />} />
-                        <Route path="job/new" element={<NewJob />} />
-                        <Route path="audit" element={<Audit />} />
-                        <Route path="monitor" element={<Monitor />} />
-                        <Route path="monitor/:id" element={<Data />} />
-                        <Route path="configuration" element={<Configuration />} />
-                        <Route path="admin" element={<Admin />} />
-                        <Route path="integration" element={<Integration />} />
-                    </Route>
-                    <Route path="*" element={<Error />} />
-                </Routes>
+                <AuthContextProvider>
+                    <Routes>
+                        <Route path="/auth" element={<Auth />}>
+                            <Route path="login" element={<Login />} />
+                            <Route path="register" element={<Register />} />
+                        </Route>
+                        <Route path="/" element={<Main />}>
+                            <Route path="" element={<Dashboard />} />
+                            <Route path="dashboard" element={<Dashboard />} />
+                            <Route path="source" element={<Source />} />
+                            <Route path="source/new" element={<NewSource />} />
+                            <Route path="sink" element={<Sink />} />
+                            <Route path="job" element={<Job />} />
+                            <Route path="job/new" element={<NewJob />} />
+                            <Route path="audit" element={<Audit />} />
+                            <Route path="monitor" element={<Monitor />} />
+                            <Route path="monitor/:id" element={<Data />} />
+                            <Route path="configuration" element={<Configuration />} />
+                            <Route path="admin/user" element={<User />} />
+                            <Route path="admin/role" element={<Role />} />
+                            <Route path="admin/permission" element={<Permission />} />
+                            <Route path="integration" element={<Integration />} />
+                        </Route>
+                        <Route path="*" element={<Error />} />
+                    </Routes>
+                </AuthContextProvider>
             </Router>
         </>
     );

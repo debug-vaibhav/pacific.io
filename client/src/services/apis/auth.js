@@ -1,8 +1,27 @@
 /* eslint-disable no-useless-catch */
 /* eslint-disable import/prefer-default-export */
-import authInstance from '../endpoints/auth.instance';
+import authInstance from '../instances/auth.instance';
 
-export const login = async (username, password) => {
-    const response = await authInstance.post('/auth/login', { username: username.trim(), password: password.trim() });
-    return response.data.data;
+export const signin = async (email, password) => {
+    try {
+        const response = await authInstance.post('/login', { email: email.trim(), password: password.trim() });
+        return response;
+    } catch (error) {
+        return error;
+    }
+};
+
+export const singup = async (username, password, confirmPassword) => {
+    try {
+        const response = await authInstance.post('/signup', {
+            firstName: firstName.trim(),
+            lastName: lastName.trim(),
+            email: username.trim(),
+            password: password.trim(),
+            confirmPassword: confirmPassword.trim(),
+        });
+        return response;
+    } catch (error) {
+        return error;
+    }
 };

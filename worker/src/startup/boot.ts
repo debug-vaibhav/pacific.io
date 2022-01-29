@@ -3,6 +3,7 @@ import { Logger } from 'winston';
 import config from 'config';
 import { Errors } from '@pacific.io/common';
 import { LoggerInstance } from '../resources/logger';
+import Consumers from './consumers';
 
 export default class Boot {
     private static LOGGER: Logger = LoggerInstance.logger;
@@ -12,6 +13,7 @@ export default class Boot {
         application
             .listen(port, () => {
                 Boot.LOGGER.warn(`Worker microservice running. Visit http://localhost:${port}`);
+                Consumers.start();
             })
             .on('error', () => {
                 Boot.LOGGER.info(Errors.APP_ERROR.description, ':', Errors.APP_ERROR.description);

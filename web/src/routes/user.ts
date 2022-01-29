@@ -10,7 +10,7 @@ export default class UserRouter {
         UserRouter.router.get('/:email', UserController.getByEmail);
         UserRouter.router.post('/', UserController.create);
         UserRouter.router.delete('/delete/:id', UserController.deleteById);
-        UserRouter.router.put('/', UserController.updateById);
+        UserRouter.router.put('/:id', UserController.updateById);
         return UserRouter.router;
     }
 }

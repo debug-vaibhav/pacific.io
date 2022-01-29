@@ -1,15 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import { Logger } from 'winston';
-import { CreateError, UpdateError, NotExistsError, DeleteError, Events, UserDto } from '@pacific.io/common';
+import { CreateError, UpdateError, NotExistsError, DeleteError, UserDto } from '@pacific.io/common';
 import UserService from '../services/user';
 import { LoggerInstance } from '../resources/logger';
-import { WorkerProducer } from '../events/producers/worker-producer';
-import { WorkerEvent } from '../events/worker-event';
 
 export default class UserController {
     private static LOGGER: Logger = LoggerInstance.logger;
     private static userService: UserService = new UserService();
-    private static workerProducer: WorkerProducer = new WorkerProducer();
 
     public static async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {

@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faBell, faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { ButtonCircled } from '../../custom/components';
 import { Dropdown } from '../../../components/custom/components';
+import AuthContext from '../../../contexts/auth-context';
 
 import styles from './topbar.scss';
 
 const search = (event) => {};
 
 const Topbar = () => {
+    const authContext = useContext(AuthContext);
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
     return (
@@ -18,10 +20,10 @@ const Topbar = () => {
                 <img src="/assets/images/logo.png" alt="Pacific Logo" />
                 <span>Pacific</span>
             </div>
-            <div className={`${styles['search-container']} flex-align-items-center`}>
+            {/* <div className={`${styles['search-container']} flex-align-items-center`}>
                 <input type="text" placeholder="Search here..." />
                 <ButtonCircled icon={<FontAwesomeIcon icon={faSearch} />} handleClick={search} styles={styles['search-btn']} />
-            </div>
+            </div> */}
             <div className={`${styles['profile-notification-container']} flex-justify-content-flex-end flex-align-items-center`}>
                 <div className={styles['notification-container']}>
                     <div className={styles['notification-wrapper']} onClick={() => setIsNotificationOpen(true)}>
@@ -74,7 +76,9 @@ const Topbar = () => {
                             <ul className={styles['profile-menu-list']}>
                                 <li className={styles['profile-menu-list-item']}>Profile</li>
                                 <li className={styles['profile-menu-list-item']}>Settings</li>
-                                <li className={styles['profile-menu-list-item']}>Logout</li>
+                                <li className={styles['profile-menu-list-item']} onClick={authContext.logout}>
+                                    Logout
+                                </li>
                             </ul>
                         </Dropdown>
                     )}

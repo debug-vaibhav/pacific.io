@@ -25,7 +25,7 @@ export const ToasterContextProvider = (props) => {
             if (toasts.length) {
                 removeToast(toasts[0].id);
             }
-        }, 1500);
+        }, 3000);
         return () => {
             clearInterval(interval);
         };
