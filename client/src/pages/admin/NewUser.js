@@ -6,103 +6,55 @@ import Breadcrumb from '../../components/ui/breadcrumb/Breadcrumb';
 import { Input, Button, ButtonOutlined, Select, InputLabeled } from '../../components/custom/components';
 import styles from './newUser.scss';
 
-const options = [
+const roles = [
     {
         key: 1,
-        text: 'Microsoft SQL Server',
-        value: 'microsoftSqlServer',
+        text: 'Software Engineer',
+        value: 'softwareEngineer',
     },
     {
         key: 2,
-        text: 'MySQL',
-        value: 'mysql',
+        text: 'QA Engineer',
+        value: 'qaEngineer',
     },
     {
         key: 3,
-        text: 'MongoDB',
-        value: 'mongoDb',
-    },
-    {
-        key: 4,
-        text: 'REST API',
-        value: 'restApi',
-    },
-    {
-        key: 5,
-        text: 'FTP/SFTP',
-        value: 'ftpSftp',
+        text: 'Manager',
+        value: 'manager',
     },
 ];
 
-const authOptions = [
-    {
-        key: 1,
-        text: 'Basic Authentication',
-        value: 'sqlServerAuthentication',
-    },
-    {
-        key: 2,
-        text: 'Access Token',
-        value: 'accessToken',
-    },
-    {
-        key: 3,
-        text: 'API Key',
-        value: 'apiKey',
-    },
-];
-
-const NewSource = (props) => {
-    const [dataSource, setDataSource] = useState('mysql');
-    const [auth, setAuth] = useState('sqlServerAuthentication');
-    const [show, setShow] = useState(false);
-    const onDatasourceChange = (value) => {
-        setDataSource(value);
-    };
-    const onAuthChange = (value) => {
-        setAuth(value);
+const NewUser = (props) => {
+    const [role, setRole] = useState('softwareEngineer');
+    const onRoleChange = (value) => {
+        setRole(value);
     };
     return (
         <div className={styles['container']}>
             <Breadcrumb />
             <div className={styles['data-container']}>
                 <div className={styles['header-container']}>
-                    <h3>Add New Data Source</h3>
-                    <p>Select appropriate choices to create new data source or connector</p>
+                    <h3>Add New User</h3>
+                    <p>Select appropriate choices to create new user</p>
                 </div>
                 <hr />
                 <div className={styles['selection-container']}>
-                    <Select
-                        name="dataSourceType"
-                        id="dataSourceType"
-                        label="Data Source Type"
-                        overriddenStyles={styles['data-source-type-selector']}
-                        options={options}
-                        value={dataSource}
-                        onChange={onDatasourceChange}
-                    />
-                    <div className={styles['connection-container']}>
-                        <div className={styles['host-port-container']}>
-                            <InputLabeled label="host" overriddenStyles={styles['host-port-fields']} />
-                            <InputLabeled label="port" overriddenStyles={styles['host-port-fields']} />
-                            <InputLabeled label="instance" overriddenStyles={styles['host-port-fields']} />
-                            <InputLabeled label="database" overriddenStyles={styles['host-port-fields']} />
+                    <div className={styles['input-container']}>
+                        <div className={styles['name-container']}>
+                            <div className={styles['firstname-lastname-container']}>
+                                <InputLabeled label="firstname" overriddenStyles={styles['name-fields']} />
+                                <InputLabeled label="lastname" overriddenStyles={styles['name-fields']} />
+                            </div>
                         </div>
-                    </div>
-                    <Select name="authType" id="authType" label="Authentication Type" overriddenStyles={styles['auth-type-selector']} options={authOptions} value={auth} onChange={onAuthChange} />
-                    <div className={styles['auth-container']}>
-                        <div className={styles['username-password-container']}>
-                            <InputLabeled label="username" overriddenStyles={styles['username-password-fields']} />
-                            <InputLabeled label="password" overriddenStyles={styles['username-password-fields']} />
+                        <Select name="role" id="role" label="role" overriddenStyles={styles['role-selector']} options={roles} value={role} onChange={onRoleChange} />
+                        <div className={styles['email-container']}>
+                            <InputLabeled label="email" overriddenStyles={styles['email-fields']} type="email" />
                         </div>
                     </div>
                     <div className={styles['action-container']}>
                         <div className={styles['create-reset-container']}>
                             <Button name="create-btn" title="create" styles={styles['create-btn']} />
                             <ButtonOutlined name="reset-btn" title="reset" styles={styles['reset-btn']} />
-                        </div>
-                        <div className={styles['test-connection-container']}>
-                            <Button name="test-connection-btn" title="test connection" styles={styles['action-btns']} onClick={() => setShow(true)} />
                         </div>
                     </div>
                 </div>
@@ -111,4 +63,4 @@ const NewSource = (props) => {
     );
 };
 
-export default NewSource;
+export default NewUser;

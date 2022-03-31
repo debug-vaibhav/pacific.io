@@ -9,7 +9,7 @@ import ToasterContext from '../../contexts/toaster-context';
 import styles from './user.scss';
 
 const Admin = (props) => {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const page = queryParams.get('page');
@@ -88,7 +88,7 @@ const Admin = (props) => {
                 </div>
                 <div className={styles['table-container']}>{tableRows()}</div>
                 <div className={styles['pagination-container']}>
-                    <Pagination pages={7} pageNumber={pageNumber} setPageNumber={setPageNumber} history={history} location={location} />
+                    <Pagination pages={7} pageNumber={pageNumber} setPageNumber={setPageNumber} navigate={navigate} location={location} />
                 </div>
             </div>
         </div>

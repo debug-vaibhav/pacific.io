@@ -2,8 +2,8 @@
 /* eslint-disable import/prefer-default-export */
 import commonInstance from '../instances/common.instance';
 
-export const getAllJobs = async () => {
-    const response = await commonInstance.get('/job');
+export const getJobs = async (page, limit) => {
+    const response = await commonInstance.get(`/job?page=${page}&limit=${limit}`);
     return response.data.data;
 };
 

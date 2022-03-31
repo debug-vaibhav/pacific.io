@@ -8,7 +8,7 @@ import Pagination from '../../components/ui/pagination/Pagination';
 import styles from './data.scss';
 
 const Data = () => {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const page = queryParams.get('page');
@@ -78,7 +78,7 @@ const Data = () => {
                 </div>
                 <div className={styles['table-container']}>{tableRows()}</div>
                 <div className={styles['pagination-container']}>
-                    <Pagination pages={5} pageNumber={pageNumber} setPageNumber={setPageNumber} history={history} location={location} />
+                    <Pagination pages={5} pageNumber={pageNumber} setPageNumber={setPageNumber} navigate={navigate} location={location} />
                 </div>
             </div>
         </div>

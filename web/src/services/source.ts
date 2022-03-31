@@ -2,12 +2,7 @@ import { CrudService, DateTimeUtility, SourceDto } from '@pacific.io/common';
 import Source from '../models/source';
 
 export default class SourceService implements CrudService {
-    public async getAll(): Promise<Array<SourceDto>> {
-        const sources: Source[] = await Source.findAll({ where: { isDeleted: false } });
-        return <SourceDto[]>sources;
-    }
-
-    public async get(limit: number, offset: number): Promise<Array<SourceDto>> {
+    public async get(limit: number | undefined, offset: number | undefined): Promise<Array<SourceDto>> {
         const sources: Source[] = await Source.findAll({ offset, limit, where: { isDeleted: false } });
         return <SourceDto[]>sources;
     }

@@ -1,0 +1,78 @@
+version: '3.9'
+services:
+    database:
+        image: mysql:8.0
+        volumes:
+            - '/d/data/docker-volumes/pacific.io/database:/var/lib/mysql'
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - 3308:3306
+    messaging:
+        image: rabbitmq:3.9.13-management
+        hostname: rabbitmq-dev
+        volumes:
+            - '/d/data/docker-volumes/pacific.io/messaging:/var/lib/rabbitmq'
+        restart: always
+        ports:
+            - 5763:5762
+            - 15763:15762
+        environment:
+            - RABBITMQ_DEFAULT_USER=guest
+            - RABBITMQ_DEFAULT_PASS=guest
+    cache:
+        image: redis:latest
+        restart: always
+        ports:
+            - 6379:6379
+    app:
+        restart: always
+        build:
+            context: ./devops/infra
+            dockerfile: Dockerfile
+        ports:
+            - '8080:80'
+        depends_on:
+            - client
+            - api
+    api:
+        build:
+            context: ./web
+            dockerfile: Dockerfile
+        ports:
+            - 4000:4000
+        volumes:
+            - /app/node_modules
+            - ./web:/app
+        depends_on:
+            - database
+            - messaging
+    worker:
+        build:
+            context: ./app
+            dockerfile: Dockerfile
+        ports:
+            - 4001:4001
+        volumes:
+            - /app/node_modules
+            - ./worker:/app
+        depends_on:
+            - database
+            - messaging
+    client:
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        ports:
+            - 8081:8081
+        volumes:
+            - /app/node_modules
+            - ./client:/app
+        depends_on:
+            - api
+volumes:
+    database:
+    messaging:
+    cache:

@@ -79,7 +79,6 @@ class Job extends Model<JobInterface, JobCreationAttributes> implements JobInter
             },
             {
                 tableName: 'job',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

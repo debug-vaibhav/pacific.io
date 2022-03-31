@@ -17,9 +17,10 @@ export default class SourceController {
     private static sourceUpdatedProducer: SourceUpdatedProducer = new SourceUpdatedProducer();
     private static sourceDeletedProducer: SourceDeletedProducer = new SourceDeletedProducer();
 
-    public static async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
+    public static async get(req: Request<any, any, any, { page: number | undefined; limit: number | undefined }>, res: Response, next: NextFunction): Promise<void> {
+        const { page, limit } = req.query;
         try {
-            const sources: SourceDto[] = await SourceController.sourceService.getAll();
+            const sources: SourceDto[] = await SourceController.sourceService.get(limit, page);
             res.json({ message: 'Datasources fetched successfully', data: sources });
         } catch (error) {
             next(new NotExistsError('Source', error));
@@ -68,4 +69,11 @@ export default class SourceController {
             next(new DeleteError('Source', error));
         }
     }
+}
+function page(page: any, limit: any): SourceDto[] | PromiseLike<SourceDto[]> {
+    throw new Error('Function not implemented.');
+}
+
+function limit(page: (page: any, limit: any) => SourceDto[] | PromiseLike<SourceDto[]>, limit: any): SourceDto[] | PromiseLike<SourceDto[]> {
+    throw new Error('Function not implemented.');
 }

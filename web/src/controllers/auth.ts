@@ -46,8 +46,7 @@ export default class AuthController {
             }
             let user: UserDto | null = await AuthController.userService.getByEmail(email);
             if (!user) {
-                const hashedPassword: string = await AuthUtility.hashPassword(password);
-                const userDto: UserDto = new UserDto(firstName, lastName, email, hashedPassword, 1, false, true, moment().format('YYYY-DD-MM HH:mm:ss'), moment().format('YYYY-DD-MM HH:mm:ss'), 0, 0);
+                const userDto: UserDto = new UserDto(firstName, lastName, email, password, 1, false, true, moment().format('YYYY-DD-MM HH:mm:ss'), moment().format('YYYY-DD-MM HH:mm:ss'), 0, 0);
                 user = await AuthController.userService.create(userDto);
                 return res.status(201).json({ message: Messages.USER_CREATED.description, data: user });
             }

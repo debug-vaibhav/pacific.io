@@ -55,7 +55,6 @@ class SourceType extends Model<SourceTypeInterface, SourceTypeCreationAttributes
             },
             {
                 tableName: 'source_type',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

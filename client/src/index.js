@@ -16,14 +16,14 @@ import Monitor from './pages/monitor/Monitor';
 import Data from './pages/monitor/Data';
 import Configuration from './pages/configuration/Configuration';
 import User from './pages/admin/User';
+import NewUser from './pages/admin/NewUser';
 import Role from './pages/admin/Role';
 import Permission from './pages/admin/Permission';
 import Integration from './pages/integration/Integration';
 import NewJob from './pages/job/NewJob';
 import Error from './components/ui/error/Error';
-
 import { Toaster } from './components/custom/components';
-
+import Authenticator from './containers/auth/Authenticator';
 import ToasterContext, { ToasterContextProvider } from './contexts/toaster-context';
 import { AuthContextProvider } from './contexts/auth-context';
 
@@ -44,7 +44,14 @@ const App = () => {
                             <Route path="login" element={<Login />} />
                             <Route path="register" element={<Register />} />
                         </Route>
-                        <Route path="/" element={<Main />}>
+                        <Route
+                            path="/"
+                            element={
+                                <Authenticator>
+                                    <Main />
+                                </Authenticator>
+                            }
+                        >
                             <Route path="" element={<Dashboard />} />
                             <Route path="dashboard" element={<Dashboard />} />
                             <Route path="source" element={<Source />} />
@@ -57,6 +64,7 @@ const App = () => {
                             <Route path="monitor/:id" element={<Data />} />
                             <Route path="configuration" element={<Configuration />} />
                             <Route path="admin/user" element={<User />} />
+                            <Route path="admin/user/new" element={<NewUser />} />
                             <Route path="admin/role" element={<Role />} />
                             <Route path="admin/permission" element={<Permission />} />
                             <Route path="integration" element={<Integration />} />

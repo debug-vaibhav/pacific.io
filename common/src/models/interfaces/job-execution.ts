@@ -1,6 +1,7 @@
 export interface JobExecutionInterface {
     id?: number;
     jobId: number;
+    schedulerId: number;
     status: string;
     startDatetime: string;
     endDatetime: string;

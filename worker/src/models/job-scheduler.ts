@@ -67,7 +67,6 @@ class JobScheduler extends Model<JobSchedulerInterface, JobSchedulerCreationAttr
             },
             {
                 tableName: 'job_scheduler',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

@@ -37,7 +37,7 @@ class Source extends Model<SourceInterface, SourceCreationAttributes> implements
                     allowNull: false,
                 },
                 typeId: {
-                    field: 'typeid',
+                    field: 'type_id',
                     type: DataTypes.INTEGER,
                     allowNull: false,
                 },
@@ -59,7 +59,8 @@ class Source extends Model<SourceInterface, SourceCreationAttributes> implements
                 instance: {
                     field: 'instance',
                     type: DataTypes.TEXT,
-                    allowNull: false,
+                    allowNull: true,
+                    defaultValue: null,
                 },
                 database: {
                     field: 'database',
@@ -106,7 +107,6 @@ class Source extends Model<SourceInterface, SourceCreationAttributes> implements
             },
             {
                 tableName: 'source',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

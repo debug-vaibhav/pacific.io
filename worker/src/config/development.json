@@ -3,9 +3,9 @@
     "port": 4001,
     "rabbitmq": "amqp://localhost",
     "databaseHost": "localhost",
-    "databasePort": 1433,
+    "databasePort": 3306,
     "databaseUsername": "root",
-    "databasePassword": "zaq1@WSX",
+    "databasePassword": "root",
     "databaseName": "worker",
     "jwtSecretKey": "1234.qwer",
     "log": {
@@ -14,5 +14,9 @@
         "archieve": "30d",
         "maxFileSize": "10",
         "zippedArchieve": false
+    },
+    "scheduler": {
+        "cronExpression": "*/1 * * * *",
+        "timezone": "Asia/Kolkata"
     }
 }

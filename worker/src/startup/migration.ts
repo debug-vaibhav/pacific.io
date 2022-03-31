@@ -2,6 +2,12 @@
 import { Logger } from 'winston';
 import { Errors } from '@pacific.io/common';
 import { LoggerInstance } from '../resources/logger';
+import Job from '../models/job';
+import Source from '../models/source';
+import SourceType from '../models/source-type';
+import JobSource from '../models/job-source';
+import JobScheduler from '../models/job-scheduler';
+import JobExecution from '../models/job-execution';
 
 export default class Migration {
     private static LOGGER: Logger = LoggerInstance.logger;
@@ -16,6 +22,20 @@ export default class Migration {
             Migration.LOGGER.info(Errors.MODEL_SYNC_ERROR.description, ':', Errors.MODEL_SYNC_ERROR.description);
         }
     }
-    static initializeAll() {}
-    static async syncAll() {}
+    static initializeAll() {
+        Source.initialize();
+        Job.initialize();
+        SourceType.initialize();
+        JobSource.initialize();
+        JobScheduler.initialize();
+        JobExecution.initialize();
+    }
+    static async syncAll() {
+        await Source.sync({ force: true });
+        await Job.sync({ force: true });
+        await SourceType.sync({ force: true });
+        await JobSource.sync({ force: true });
+        await JobScheduler.sync({ force: true });
+        await JobExecution.sync({ force: true });
+    }
 }

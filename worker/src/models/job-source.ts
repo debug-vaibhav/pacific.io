@@ -61,7 +61,6 @@ class JobSource extends Model<JobSourceInterface, JobSourceCreationAttributes> i
             },
             {
                 tableName: 'job_source',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

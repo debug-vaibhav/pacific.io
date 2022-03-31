@@ -5,25 +5,31 @@ import { faCircleNotch, faEllipsisH, faPlusCircle, faFilter } from '@fortawesome
 import Breadcrumb from '../../components/ui/breadcrumb/Breadcrumb';
 import { InputRounded, Button, ButtonOutlined, Chip, CheckBox } from '../../components/custom/components';
 import Pagination from '../../components/ui/pagination/Pagination';
+import { getUsers } from '../../services/apis/user';
 import ToasterContext from '../../contexts/toaster-context';
+import AuthContext from '../../contexts/auth-context';
 import styles from './user.scss';
 
 const User = (props) => {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const page = queryParams.get('page');
     const [pageNumber, setPageNumber] = useState(parseInt(page) || 1);
     const [users, setUsers] = useState([]);
     const toasterContext = useContext(ToasterContext);
+    const authContext = useContext(AuthContext);
     useEffect(() => {
-        let arr = [];
-        for (let i = 0; i < 9; i++) {
-            arr.push(Math.ceil(Math.random() * 10000));
+        async function fetchUsers() {
+            const response = await getUsers(authContext.user.token, (pageNumber - 1) * 10, 10);
+            if (response.status === 200) {
+                const users = response.data.data;
+                setUsers(users);
+            } else {
+                toasterContext.addToast('danger', response.response.data.errors[0].description);
+            }
         }
-        setTimeout(() => {
-            setUsers(arr);
-        }, 100);
+        fetchUsers();
     }, [pageNumber]);
     const tableRows = () => {
         if (users.length === 0) {
@@ -81,14 +87,14 @@ const User = (props) => {
                 <div className={styles['search-container']}>
                     <InputRounded type="text" placeholder="search users" overriddenStyles={styles['search-input']} />
                     <div className={styles['action-container']}>
-                        <Link to="/user/new">
+                        <Link to="/admin/user/new">
                             <Button title="NEW USER" icon={<FontAwesomeIcon icon={faPlusCircle} className={styles['add-icon']} />} styles={styles['new-btn']} />
                         </Link>
                     </div>
                 </div>
                 <div className={styles['table-container']}>{tableRows()}</div>
                 <div className={styles['pagination-container']}>
-                    <Pagination pages={7} pageNumber={pageNumber} setPageNumber={setPageNumber} history={history} location={location} />
+                    <Pagination pages={7} pageNumber={pageNumber} setPageNumber={setPageNumber} navigate={navigate} location={location} />
                 </div>
             </div>
         </div>

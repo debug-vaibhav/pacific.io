@@ -1,0 +1,59 @@
+version: '3'
+services:
+    app:
+        image: nginx:latest
+        depends_on:
+            - client
+            - api
+    client:
+        build:
+            context: ./app
+            dockerfile: Dockerfile
+        ports:
+            - 8081:8081
+        volumes:
+            - /client/node_modules
+            - ./client:/app
+        depends_on:
+            - api
+    api:
+        build:
+            context: ./app
+            dockerfile: Dockerfile
+        ports:
+            - 8081:8081
+        volumes:
+            - /app/node_modules
+            - ./web:/app
+        depends_on:
+            - database
+            - messaging
+    worker:
+        build:
+            context: ./app
+            dockerfile: Dockerfile
+        ports:
+            - 8081:8081
+        volumes:
+            - /app/node_modules
+            - ./worker:/app
+        depends_on:
+            - database
+            - messaging
+    database:
+        image: mysql:8.0
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - 3308:3306
+    messaging:
+        image: rabbitmq:3.9.13-management
+        restart: always
+        ports:
+            - 5763:5762
+            - 15763:15762
+        environment:
+            - RABBITMQ_DEFAULT_USER=guest
+            - RABBITMQ_DEFAULT_PASS=guest

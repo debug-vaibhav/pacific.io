@@ -3,9 +3,9 @@
     "port": 4000,
     "rabbitmq": "amqp://localhost",
     "databaseHost": "localhost",
-    "databasePort": 1433,
+    "databasePort": 3306,
     "databaseUsername": "root",
-    "databasePassword": "zaq1@WSX",
+    "databasePassword": "root",
     "databaseName": "web",
     "jwtSecretKey": "1234.qwer",
     "log": {
