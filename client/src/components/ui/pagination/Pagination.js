@@ -4,7 +4,7 @@ import { faChevronLeft, faChevronRight, faEllipsisH } from '@fortawesome/free-so
 import { ButtonOutlined } from '../../custom/components';
 import styles from './pagination.scss';
 
-const Pagination = ({ pages, pageNumber, setPageNumber, history, location }) => {
+const Pagination = ({ pages, pageNumber, setPageNumber, navigate, location }) => {
     const [pageBtns, setPageBtns] = useState({
         first: '1',
         second: '2',
@@ -70,20 +70,20 @@ const Pagination = ({ pages, pageNumber, setPageNumber, history, location }) => 
     const handlePreviousClick = () => {
         if (pageNumber > 1) {
             setPageNumber(pageNumber - 1);
-            history.push(`${location.pathname}?page=${pageNumber - 1}`);
+            navigate(`${location.pathname}?page=${pageNumber - 1}`);
         }
     };
     const handleNextClick = () => {
         if (pageNumber < pages) {
             setPageNumber(pageNumber + 1);
-            history.push(`${location.pathname}?page=${pageNumber + 1}`);
+            navigate(`${location.pathname}?page=${pageNumber + 1}`);
         }
     };
     const handlePageBtnClick = (pageId) => {
         const id = pageId.split('-')[1];
         if (!isNaN(parseInt(id))) {
             setPageNumber(parseInt(id));
-            history.push(`${location.pathname}?page=${parseInt(id)}`);
+            navigate(`${location.pathname}?page=${parseInt(id)}`);
         }
     };
     const renderPageBtns = () => {

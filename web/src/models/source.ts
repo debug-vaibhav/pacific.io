@@ -59,6 +59,10 @@ class Source extends Model<SourceInterface, SourceCreationAttributes> implements
                     field: 'instance',
                     type: DataTypes.TEXT,
                     allowNull: true,
+<<<<<<< HEAD
+=======
+                    defaultValue: null,
+>>>>>>> 6ffa7946a5b16d23ac09b6a73cdce49c0bb7e932
                 },
                 database: {
                     field: 'database',

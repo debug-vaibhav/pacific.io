@@ -17,9 +17,10 @@ export default class UserController {
     private static userUpdatedProducer: UserUpdatedProducer = new UserUpdatedProducer();
     private static userDeletedProducer: UserDeletedProducer = new UserDeletedProducer();
 
-    public static async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
+    public static async get(req: Request<any, any, any, { page: string | undefined; limit: string | undefined }>, res: Response, next: NextFunction): Promise<void> {
+        const { page, limit } = req.query;
         try {
-            const users: UserDto[] = await UserController.userService.getAll();
+            const users: UserDto[] = await UserController.userService.get(Number(limit), Number(page));
             res.json({ message: 'Users fetched successfully', data: users });
         } catch (error) {
             next(new NotExistsError('User', error));

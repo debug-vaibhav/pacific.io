@@ -3,6 +3,7 @@ import { JobExecutionInterface } from '../interfaces/job-execution';
 export class JobExecutionDto implements JobExecutionInterface {
     public id?: number | undefined;
     public jobId: number;
+    public schedulerId: number;
     public status: string;
     public startDatetime: string;
     public endDatetime: string;
@@ -12,8 +13,20 @@ export class JobExecutionDto implements JobExecutionInterface {
     public updatedBy: number;
     public isDeleted: boolean;
 
-    constructor(jobId: number, status: string, startDatetime: string, endDatetime: string, createdDate: string, updatedDate: string, createdBy: number, updatedBy: number, isDeleted: boolean) {
+    constructor(
+        jobId: number,
+        schedulerId: number,
+        status: string,
+        startDatetime: string,
+        endDatetime: string,
+        createdDate: string,
+        updatedDate: string,
+        createdBy: number,
+        updatedBy: number,
+        isDeleted: boolean
+    ) {
         this.jobId = jobId;
+        this.schedulerId = schedulerId;
         this.status = status;
         this.startDatetime = startDatetime;
         this.endDatetime = endDatetime;

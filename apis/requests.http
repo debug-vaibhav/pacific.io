@@ -1,0 +1,77 @@
+GET  http://{{baseURL}} HTTP/1.1
+###
+POST  http://{{baseURL}}/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "admin@pacific.io",
+    "password": "admin"
+}
+###
+POST  http://{{baseURL}}/auth/signup HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName": "Vaibhav",
+    "lastName": "Bachhav",
+    "email": "vaibhav.bachhav@pacific.io",
+    "password": "password",
+    "confirmPassword": "password"
+}
+
+
+###
+GET  http://{{baseURL}}/source HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+GET  http://{{baseURL}}/source/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###
+POST  http://{{baseURL}}/source HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "name",
+    "typeId": 1,
+    "description": "description",
+    "labels": "SQL,MYSQL,DATABASE,REMOTE",
+    "host": "localhost",
+    "port": 31433,
+    "instance": "SQLEXPRESS",
+    "database": "WideWorldImporters",
+    "username": "root",
+    "password": "zaq1@WSX",
+    "createdDate": "2021-16-10 20:08:43",
+    "updatedDate": "2021-16-10 20:08:43",
+    "createdBy": 1,
+    "updatedBy": 1,
+    "isDeleted": false
+}
+###
+PUT  http://{{baseURL}}/source HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "name",
+    "typeId": 1,
+    "description": "description",
+    "labels": "SQL,MYSQL,DATABASE,REMOTE,UPDATED",
+    "host": "localhost",
+    "port": 31450,
+    "instance": "SQLEXPRESS",
+    "database": "WideWorldImporters",
+    "username": "root",
+    "password": "zaq1@WSX",
+    "updatedDate": "2021-16-10 20:08:43",
+    "updatedBy": 1,
+    "isDeleted": false
+}
+###
+DELETE  http://{{baseURL}}/source/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+###

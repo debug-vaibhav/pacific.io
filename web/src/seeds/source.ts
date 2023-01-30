@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import moment from 'moment';
+import { SourceDto } from '@pacific.io/common';
+>>>>>>> 6ffa7946a5b16d23ac09b6a73cdce49c0bb7e932
 import { Logger } from 'winston';
 import { Errors, SourceDto, DateTimeUtility } from '@pacific.io/common';
 import { LoggerInstance } from '../resources/logger';
@@ -61,10 +66,13 @@ export default class SourceSeeder {
                 ),
             ];
             SourceSeeder.LOGGER.info('Source model truncation started before seeding');
-            await Source.destroy({ truncate: true });
+            await Source.destroy({ truncate: true, cascade: true });
             SourceSeeder.LOGGER.info('Source model truncation completed');
             SourceSeeder.LOGGER.info('Source seeding process started');
-            await Source.bulkCreate(sourceDtos);
+            const size = await Source.count();
+            if (size === 0) {
+                await Source.bulkCreate(sourceDtos);
+            }
             SourceSeeder.LOGGER.info('Source seeding process completed');
         } catch (error) {
             console.log(error);

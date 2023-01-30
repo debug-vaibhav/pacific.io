@@ -8,12 +8,7 @@ import JobSource from '../models/job-source';
 import JobScheduler from '../models/job-scheduler';
 
 export default class JobService implements CrudService {
-    public async getAll(): Promise<Array<JobDto>> {
-        const jobs: Job[] = await Job.findAll({ where: { isDeleted: false } });
-        return <JobDto[]>jobs;
-    }
-
-    public async get(limit: number, offset: number): Promise<Array<JobDto>> {
+    public async get(limit: number | undefined, offset: number | undefined): Promise<Array<JobDto>> {
         const jobs: Job[] = await Job.findAll({ offset, limit, where: { isDeleted: false } });
         return <JobDto[]>jobs;
     }

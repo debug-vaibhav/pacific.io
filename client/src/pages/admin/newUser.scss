@@ -25,38 +25,29 @@
     }
 }
 .selection-container {
-    .data-source-type-selector {
-        margin-top: 2rem;
-    }
-    .auth-type-selector {
-        width: 18rem;
-        margin-top: 2.5rem;
-    }
-    .connection-selector {
-        margin-top: 2rem;
-        border-radius: 0.5rem;
-    }
-    .connection-container {
-        margin-top: 2.5rem;
-        .host-port-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            .host-port-fields {
-                margin-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    .input-container {
+        .name-container {
+            margin-top: 2.5rem;
+            .firstname-lastname-container {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                width: 40%;
+                .name-fields {
+                    margin-right: 2rem;
+                }
             }
         }
-    }
-    .auth-container {
-        margin-top: 2.5rem;
-        .username-password-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
+        .role-selector {
+            margin-top: 2rem;
+        }
+        .email-container {
+            margin-top: 2rem;
             width: 40%;
-            .username-password-fields {
-                margin-right: 2rem;
-            }
         }
     }
     .action-container {

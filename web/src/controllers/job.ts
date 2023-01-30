@@ -14,9 +14,10 @@ export default class JobController {
     private static jobUpdatedProducer: JobUpdatedProducer = new JobUpdatedProducer();
     private static jobDeletedProducer: JobDeletedProducer = new JobDeletedProducer();
 
-    public static async get(req: Request, res: Response, next: NextFunction): Promise<void> {
+    public static async get(req: Request<any, any, any, { page: number | undefined; limit: number | undefined }>, res: Response, next: NextFunction): Promise<void> {
+        const { page, limit } = req.query;
         try {
-            const jobs: JobDto[] = await JobController.jobService.get(0, 100);
+            const jobs: JobDto[] = await JobController.jobService.get(limit, page);
             res.json({ message: 'Jobs fetched successfully', data: jobs });
         } catch (error) {
             next(new NotExistsError('Job', error));

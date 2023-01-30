@@ -44,8 +44,7 @@ const Sidenav = () => {
                             <div className={styles['sidenav-list-item-submenu']}>
                                 <ul>
                                     {menuItem.subMenu.map((menu) => {
-                                        console.log(location.pathname, menu.url);
-                                        if (location.pathname === menu.url) {
+                                        if (location.pathname.startsWith(menu.url)) {
                                             return (
                                                 <li key={menu.id} className={styles['sidenav-list-item-submenu-active']}>
                                                     <NavLink className={styles['link']} to={menu.url}>

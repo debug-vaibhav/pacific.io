@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import moment from 'moment';
+import { JobDto } from '@pacific.io/common';
+>>>>>>> 6ffa7946a5b16d23ac09b6a73cdce49c0bb7e932
 import { Logger } from 'winston';
 import { Errors, JobDto, DateTimeUtility } from '@pacific.io/common';
 import { LoggerInstance } from '../resources/logger';
@@ -15,7 +20,7 @@ export default class JobSeeder {
                     'MySQL data job',
                     'this job extracts data from mysql databases',
                     'Asia/Kolkata',
-                    '0 0 12 1/1 * ? *',
+                    '*/5 * * * *',
                     'SELECT * FROM dbo.users',
                     DateTimeUtility.getCurrentDateTime(),
                     DateTimeUtility.getCurrentDateTime(),
@@ -24,10 +29,10 @@ export default class JobSeeder {
                     true
                 ),
                 new JobDto(
-                    'MSSQL data job',
+                    'MySQL data job',
                     'this job extracts data from sql server databases',
                     'Asia/Kolkata',
-                    '0 0 12 1/1 * ? *',
+                    '*/10 * * * *',
                     'SELECT * FROM dbo.users',
                     DateTimeUtility.getCurrentDateTime(),
                     DateTimeUtility.getCurrentDateTime(),
@@ -40,7 +45,10 @@ export default class JobSeeder {
             await Job.destroy({ truncate: true });
             JobSeeder.LOGGER.info('Job model truncation completed');
             JobSeeder.LOGGER.info('Job seeding process started');
-            await Job.bulkCreate(userDtos);
+            const size = await Job.count();
+            if (size === 0) {
+                await Job.bulkCreate(userDtos);
+            }
             JobSeeder.LOGGER.info('Job seeding process completed');
         } catch (error) {
             JobSeeder.LOGGER.error(Errors.SEED_ERROR.description, ':', Errors.SEED_ERROR.description, error);

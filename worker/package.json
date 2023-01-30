@@ -21,8 +21,12 @@
         "bcryptjs": "^2.4.3",
         "config": "^3.3.6",
         "cors": "^2.8.5",
+<<<<<<< HEAD
         "cron": "^2.0.0",
         "cron-parser": "^4.4.0",
+=======
+        "cron": "^1.8.2",
+>>>>>>> 6ffa7946a5b16d23ac09b6a73cdce49c0bb7e932
         "express": "^4.17.1",
         "express-validator": "^6.11.1",
         "helmet": "^4.6.0",
@@ -39,7 +43,11 @@
         "@types/bcryptjs": "^2.4.2",
         "@types/config": "0.0.38",
         "@types/cors": "^2.8.10",
+<<<<<<< HEAD
         "@types/cron": "^2.0.0",
+=======
+        "@types/cron": "^1.7.3",
+>>>>>>> 6ffa7946a5b16d23ac09b6a73cdce49c0bb7e932
         "@types/express": "^4.17.12",
         "@types/helmet": "^4.0.0",
         "@types/jsonwebtoken": "^8.5.1",

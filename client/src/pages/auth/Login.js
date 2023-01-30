@@ -8,7 +8,6 @@ const Login = (props) => {
     const usernameRef = useRef();
     const passwordRef = useRef();
     const authContext = useContext(AuthContext);
-    console.log(authContext);
 
     const authenticate = (event) => {
         authContext.login(event, usernameRef.current.value, passwordRef.current.value);

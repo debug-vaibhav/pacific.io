@@ -3,7 +3,11 @@
     "port": 4001,
     "rabbitmq": "amqp://localhost",
     "databaseHost": "localhost",
+<<<<<<< HEAD
     "databasePort": 36012,
+=======
+    "databasePort": 3306,
+>>>>>>> 6ffa7946a5b16d23ac09b6a73cdce49c0bb7e932
     "databaseUsername": "root",
     "databasePassword": "root",
     "databaseName": "worker",
@@ -14,5 +18,9 @@
         "archieve": "30d",
         "maxFileSize": "10",
         "zippedArchieve": false
+    },
+    "scheduler": {
+        "cronExpression": "*/1 * * * *",
+        "timezone": "Asia/Kolkata"
     }
 }

@@ -2,12 +2,7 @@ import { CrudService, UserDto, DateTimeUtility } from '@pacific.io/common';
 import User from '../models/user';
 
 export default class UserService implements CrudService {
-    public async getAll(): Promise<Array<UserDto>> {
-        const users: User[] = await User.findAll({ where: { isDeleted: false } });
-        return <UserDto[]>users;
-    }
-
-    public async get(limit: number, offset: number): Promise<Array<UserDto>> {
+    public async get(limit: number | undefined, offset: number | undefined): Promise<Array<UserDto>> {
         const users: User[] = await User.findAll({ offset, limit, where: { isDeleted: false } });
         return <UserDto[]>users;
     }

@@ -1,6 +1,6 @@
 import { Model, Optional, DataTypes } from 'sequelize';
 import { DatabaseInstance } from '../resources/database';
-import { UserInterface } from '@pacific.io/common';
+import { UserInterface, AuthUtility } from '@pacific.io/common';
 
 type UserCreationAttributes = Optional<UserInterface, 'id'>;
 
@@ -89,6 +89,12 @@ class User extends Model<UserInterface, UserCreationAttributes> implements UserI
                 tableName: 'user',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
+                hooks: {
+                    beforeCreate: async (user, options) => {
+                        const hashedPassword: string = await AuthUtility.hashPassword(user.password);
+                        user.password = hashedPassword;
+                    },
+                },
             }
         );
     }

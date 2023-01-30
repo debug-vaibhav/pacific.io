@@ -2,8 +2,8 @@
 /* eslint-disable import/prefer-default-export */
 import commonInstance from '../instances/common.instance';
 
-export const getAllSources = async () => {
-    const response = await commonInstance.get('/source');
+export const getSources = async (page, limit) => {
+    const response = await commonInstance.get(`/source?page=${page}&limit=${limit}`);
     return response.data.data;
 };
 

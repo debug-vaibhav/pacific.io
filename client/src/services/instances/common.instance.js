@@ -5,6 +5,5 @@ const commonInstance = axios.create({
     timeout: 5000,
     responseType: 'json',
     responseEncoding: 'utf8',
-    headers: { 'Content-Type': 'application/json' },
 });
 export default commonInstance;

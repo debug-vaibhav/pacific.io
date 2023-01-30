@@ -7,6 +7,7 @@ type JobExecutionCreationAttributes = Optional<JobExecutionInterface, 'id'>;
 class JobExecution extends Model<JobExecutionInterface, JobExecutionCreationAttributes> implements JobExecutionInterface {
     public id!: number;
     public jobId!: number;
+    public schedulerId!: number;
     public status!: string;
     public startDatetime!: string;
     public endDatetime!: string;
@@ -27,6 +28,11 @@ class JobExecution extends Model<JobExecutionInterface, JobExecutionCreationAttr
                 },
                 jobId: {
                     field: 'job_id',
+                    type: DataTypes.INTEGER,
+                    allowNull: false,
+                },
+                schedulerId: {
+                    field: 'scheduler_id',
                     type: DataTypes.INTEGER,
                     allowNull: false,
                 },

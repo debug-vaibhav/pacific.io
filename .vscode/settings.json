@@ -4,8 +4,18 @@
         "typescript": "typescript"
     },
     "typescript.tsdk": "node_modules\\typescript\\lib",
+<<<<<<< HEAD
     "terminal.integrated.fontWeight": "normal",
     "editor.fontFamily": "JetBrains Mono Regular",
     "editor.fontSize": 13,
     "editor.letterSpacing": 0,
+=======
+    "rest-client.environmentVariables": {
+        "local": {
+            "version": "v1",
+            "baseURL": "localhost:4000/api/v1",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWYWliaGF2IiwibGFzdE5hbWUiOiJCYWNoaGF2IiwiZW1haWwiOiJ2YWliaGF2LmJhY2hoYXZAcGFjaWZpYy5pbyIsInJvbGVJZCI6MSwiaWF0IjoxNjQzNTk5MDg2LCJleHAiOjE2NDM2ODU0ODZ9.NrMgx6pzAhGGTuvmfm5wdv9HkiSwf6r91p-67lk8yTo"
+        }
+    }
+>>>>>>> 6ffa7946a5b16d23ac09b6a73cdce49c0bb7e932
 }
