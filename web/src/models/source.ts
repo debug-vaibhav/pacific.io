@@ -1,7 +1,6 @@
 import { Model, Optional, DataTypes } from 'sequelize';
-import { DateTimeUtility } from '@pacific.io/common';
 import { DatabaseInstance } from '../resources/database';
-import { SourceInterface } from '@pacific.io/common';
+import { SourceInterface, DateTimeUtility } from '@pacific.io/common';
 
 type SourceCreationAttributes = Optional<SourceInterface, 'id'>;
 
@@ -37,7 +36,7 @@ class Source extends Model<SourceInterface, SourceCreationAttributes> implements
                     allowNull: false,
                 },
                 typeId: {
-                    field: 'typeid',
+                    field: 'type_id',
                     type: DataTypes.INTEGER,
                     allowNull: false,
                 },
@@ -59,7 +58,7 @@ class Source extends Model<SourceInterface, SourceCreationAttributes> implements
                 instance: {
                     field: 'instance',
                     type: DataTypes.TEXT,
-                    allowNull: false,
+                    allowNull: true,
                 },
                 database: {
                     field: 'database',
@@ -106,7 +105,6 @@ class Source extends Model<SourceInterface, SourceCreationAttributes> implements
             },
             {
                 tableName: 'source',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

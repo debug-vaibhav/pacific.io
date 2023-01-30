@@ -15,7 +15,7 @@ class Application {
         RabbitMQInstance.connection.on('close', () => {
             process.exit();
         });
-        await DatabaseInstance.connect(config.get('databaseName'), 'mssql', config.get('databaseUsername'), config.get('databasePassword'), config.get('databaseHost'), config.get('databasePort'));
+        await DatabaseInstance.connect(config.get('databaseName'), 'mysql', config.get('databaseUsername'), config.get('databasePassword'), config.get('databaseHost'), config.get('databasePort'));
         await Migration.syncMigrations();
         Cors.applyCors(Application.application);
         Route.loadRoutes(Application.application);

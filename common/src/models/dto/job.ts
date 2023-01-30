@@ -23,7 +23,7 @@ export class JobDto implements JobInterface {
         updatedDate: string,
         createdBy: number,
         updatedBy: number,
-        isDeleted: boolean
+        isDeleted: boolean,
     ) {
         this.name = name;
         this.description = description;

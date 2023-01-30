@@ -73,7 +73,6 @@ class JobExecution extends Model<JobExecutionInterface, JobExecutionCreationAttr
             },
             {
                 tableName: 'job_execution',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

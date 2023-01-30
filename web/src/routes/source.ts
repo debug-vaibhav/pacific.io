@@ -9,6 +9,7 @@ export default class SourceRouter {
         SourceRouter.router.get('/:id', SourceController.getById);
         SourceRouter.router.post('/', SourceController.create);
         SourceRouter.router.put('/:id', SourceController.updateById);
+        SourceRouter.router.delete('/', SourceController.deleteAll);
         SourceRouter.router.delete('/:id', SourceController.deleteById);
         return SourceRouter.router;
     }

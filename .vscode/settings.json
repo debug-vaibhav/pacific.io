@@ -3,5 +3,9 @@
     "emmet.includeLanguages": {
         "typescript": "typescript"
     },
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "terminal.integrated.fontWeight": "normal",
+    "editor.fontFamily": "JetBrains Mono Regular",
+    "editor.fontSize": 13,
+    "editor.letterSpacing": 0,
 }

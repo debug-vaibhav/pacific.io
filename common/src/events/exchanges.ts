@@ -10,5 +10,8 @@ export enum Exchanges {
     JobStopped = 'pacific.io.exchange.worker-job:stopped',
     SourceCreated = 'pacific.io.exchange.worker-source:created',
     SourceDeleted = 'pacific.io.exchange.worker-source:deleted',
-    SourceUpdated = 'pacific.io.exchange.worker-job:updated',
+    SourceUpdated = 'pacific.io.exchange.worker-source:updated',
+    UserCreated = 'pacific.io.exchange.worker-user:created',
+    UserDeleted = 'pacific.io.exchange.worker-user:deleted',
+    UserUpdated = 'pacific.io.exchange.worker-user:updated',
 }

@@ -1,4 +1,7 @@
 export enum Events {
+    UserCreated = 'user:created',
+    UserUpdated = 'user:updated',
+    UserDeleted = 'user:deleted',
     SourceCreated = 'source:created',
     SourceUpdated = 'source:updated',
     SourceDeleted = 'source:deleted',

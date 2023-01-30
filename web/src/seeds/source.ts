@@ -1,15 +1,15 @@
-import moment from 'moment';
 import { Logger } from 'winston';
-import { Errors } from '@pacific.io/common';
+import { Errors, SourceDto, DateTimeUtility } from '@pacific.io/common';
 import { LoggerInstance } from '../resources/logger';
-import Source from '../models/dao/source';
-import SourceDto from '../models/dto/source';
+import Source from '../models/source';
 
 export default class SourceSeeder {
     private static LOGGER: Logger = LoggerInstance.logger;
 
     public static async seed(): Promise<void> {
         try {
+            await Source.initialize();
+            await Source.sync({ alter: true });
             const sourceDtos: SourceDto[] = [
                 new SourceDto(
                     'MySQL data Source',
@@ -20,9 +20,9 @@ export default class SourceSeeder {
                     'username',
                     'password',
                     'database',
-                    undefined,
-                    moment().format('YYYY-DD-MM HH:mm:ss'),
-                    moment().format('YYYY-DD-MM HH:mm:ss'),
+                    "",
+                    DateTimeUtility.getCurrentDateTime(),
+                    DateTimeUtility.getCurrentDateTime(),
                     0,
                     0,
                     false
@@ -36,9 +36,9 @@ export default class SourceSeeder {
                     'username',
                     'password',
                     'database',
-                    undefined,
-                    moment().format('YYYY-DD-MM HH:mm:ss'),
-                    moment().format('YYYY-DD-MM HH:mm:ss'),
+                    "",
+                    DateTimeUtility.getCurrentDateTime(),
+                    DateTimeUtility.getCurrentDateTime(),
                     0,
                     0,
                     false
@@ -52,9 +52,9 @@ export default class SourceSeeder {
                     'username',
                     'password',
                     'database',
-                    undefined,
-                    moment().format('YYYY-DD-MM HH:mm:ss'),
-                    moment().format('YYYY-DD-MM HH:mm:ss'),
+                    "",
+                    DateTimeUtility.getCurrentDateTime(),
+                    DateTimeUtility.getCurrentDateTime(),
                     0,
                     0,
                     false
@@ -67,6 +67,7 @@ export default class SourceSeeder {
             await Source.bulkCreate(sourceDtos);
             SourceSeeder.LOGGER.info('Source seeding process completed');
         } catch (error) {
+            console.log(error);
             SourceSeeder.LOGGER.error(Errors.SEED_ERROR.description, ':', Errors.SEED_ERROR.description, error);
         }
     }

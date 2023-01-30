@@ -32,12 +32,12 @@ export default class Migration {
         JobExecution.initialize();
     }
     static async syncAll() {
-        await User.sync();
-        await Source.sync();
-        await Job.sync();
-        await SourceType.sync();
-        await JobSource.sync();
-        await JobScheduler.sync();
-        await JobExecution.sync();
+        await User.sync({ alter: true });
+        await Source.sync({ alter: true });
+        await Job.sync({ alter: true });
+        await SourceType.sync({ alter: true });
+        await JobSource.sync({ alter: true });
+        await JobScheduler.sync({ alter: true });
+        await JobExecution.sync({ alter: true });
     }
 }

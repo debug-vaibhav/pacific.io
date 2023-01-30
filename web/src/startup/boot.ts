@@ -7,7 +7,7 @@ import { LoggerInstance } from '../resources/logger';
 export default class Boot {
     private static LOGGER: Logger = LoggerInstance.logger;
 
-    static boot(application: Express) {
+    static async  boot(application: Express) {
         const port: number = config.get('port');
         application
             .listen(port, () => {

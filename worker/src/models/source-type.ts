@@ -1,6 +1,6 @@
 import { Model, Optional, DataTypes } from 'sequelize';
-import { SourceTypeInterface } from '@pacific.io/common';
 import { DatabaseInstance } from '../resources/database';
+import { SourceTypeInterface } from '@pacific.io/common';
 
 type SourceTypeCreationAttributes = Optional<SourceTypeInterface, 'id'>;
 
@@ -55,7 +55,6 @@ class SourceType extends Model<SourceTypeInterface, SourceTypeCreationAttributes
             },
             {
                 tableName: 'source_type',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

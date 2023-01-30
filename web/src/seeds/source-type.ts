@@ -1,22 +1,23 @@
 import moment from 'moment';
 import { Logger } from 'winston';
-import { Errors } from '@pacific.io/common';
+import { Errors, SourceTypeDto, DateTimeUtility } from '@pacific.io/common';
 import { LoggerInstance } from '../resources/logger';
-import SourceType from '../models/dao/source-type';
-import SourceTypeDto from '../models/dto/source-type';
+import SourceType from '../models/source-type';
 
 export default class SourceTypeSeeder {
     private static LOGGER: Logger = LoggerInstance.logger;
 
     public static async seed(): Promise<void> {
         try {
+            await SourceType.initialize();
+            await SourceType.sync({ alter: true });
             const sourceTypeDtos: SourceTypeDto[] = [
-                new SourceTypeDto('MySQL', moment().format('YYYY-DD-MM HH:mm:ss'), moment().format('YYYY-DD-MM HH:mm:ss'), 1, 1, false),
-                new SourceTypeDto('MSSQL', moment().format('YYYY-DD-MM HH:mm:ss'), moment().format('YYYY-DD-MM HH:mm:ss'), 1, 1, false),
-                new SourceTypeDto('MongoDB', moment().format('YYYY-DD-MM HH:mm:ss'), moment().format('YYYY-DD-MM HH:mm:ss'), 1, 1, false),
-                new SourceTypeDto('REST', moment().format('YYYY-DD-MM HH:mm:ss'), moment().format('YYYY-DD-MM HH:mm:ss'), 1, 1, false),
-                new SourceTypeDto('FTP', moment().format('YYYY-DD-MM HH:mm:ss'), moment().format('YYYY-DD-MM HH:mm:ss'), 1, 1, false),
-                new SourceTypeDto('SFTP', moment().format('YYYY-DD-MM HH:mm:ss'), moment().format('YYYY-DD-MM HH:mm:ss'), 1, 1, false),
+                new SourceTypeDto('MySQL', DateTimeUtility.getCurrentDateTime(), DateTimeUtility.getCurrentDateTime(), 1, 1, false),
+                new SourceTypeDto('MSSQL', DateTimeUtility.getCurrentDateTime(), DateTimeUtility.getCurrentDateTime(), 1, 1, false),
+                new SourceTypeDto('MongoDB', DateTimeUtility.getCurrentDateTime(), DateTimeUtility.getCurrentDateTime(), 1, 1, false),
+                new SourceTypeDto('REST', DateTimeUtility.getCurrentDateTime(), DateTimeUtility.getCurrentDateTime(), 1, 1, false),
+                new SourceTypeDto('FTP', DateTimeUtility.getCurrentDateTime(), DateTimeUtility.getCurrentDateTime(), 1, 1, false),
+                new SourceTypeDto('SFTP', DateTimeUtility.getCurrentDateTime(), DateTimeUtility.getCurrentDateTime(), 1, 1, false),
             ];
             await SourceType.initialize();
             SourceTypeSeeder.LOGGER.info('SourceType model truncation started before seeding');

@@ -1,6 +1,6 @@
 import { Model, Optional, DataTypes } from 'sequelize';
-import { JobExecutionInterface } from '@pacific.io/common';
 import { DatabaseInstance } from '../resources/database';
+import { JobExecutionInterface } from '@pacific.io/common';
 
 type JobExecutionCreationAttributes = Optional<JobExecutionInterface, 'id'>;
 
@@ -73,7 +73,6 @@ class JobExecution extends Model<JobExecutionInterface, JobExecutionCreationAttr
             },
             {
                 tableName: 'job_execution',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

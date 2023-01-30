@@ -3,6 +3,7 @@ import config from 'config';
 import { Cors } from '@pacific.io/common';
 import Migration from './startup/migration';
 import Boot from './startup/boot';
+import Scheduler from './startup/scheduler';
 import { RabbitMQInstance } from './resources/rabbitmq';
 import { DatabaseInstance } from './resources/database';
 
@@ -14,8 +15,9 @@ class Application {
         RabbitMQInstance.connection.on('close', () => {
             process.exit();
         });
-        await DatabaseInstance.connect(config.get('databaseName'), 'mssql', config.get('databaseUsername'), config.get('databasePassword'), config.get('databaseHost'), config.get('databasePort'));
+        await DatabaseInstance.connect(config.get('databaseName'), 'mysql', config.get('databaseUsername'), config.get('databasePassword'), config.get('databaseHost'), config.get('databasePort'));
         await Migration.syncMigrations();
+        Scheduler.start();
         Cors.applyCors(Application.application);
         Boot.boot(Application.application);
     }

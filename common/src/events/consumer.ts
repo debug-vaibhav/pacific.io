@@ -18,8 +18,12 @@ export abstract class Consumer<T extends Event> {
                 this.queue,
                 (msg: any) => {
                     const buffer: Buffer = msg.content;
-                    this._rabbitMQ.channel.ack(msg);
-                    this.onMessage(JSON.parse(buffer.toString()));
+                    try {
+                        this._rabbitMQ.channel.ack(msg);
+                        this.onMessage(JSON.parse(buffer.toString()));
+                    } catch (error) {
+                        console.log(error);
+                    }
                 },
                 {
                     noAck: false,

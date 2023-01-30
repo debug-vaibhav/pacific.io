@@ -1,19 +1,17 @@
 import { Logger } from 'winston';
 import { Request, Response, NextFunction } from 'express';
 import config from 'config';
-import moment from 'moment';
 import jwt from 'jsonwebtoken';
-import { Errors, CreateError, ExistsError, NotExistsError, AuthenticationError, MismatchError, AuthUtility, Messages, UserDto, UserSignupDto, UserRoleDto, EmailPasswordDto } from '@pacific.io/common';
+import { Errors, CreateError, ExistsError, NotExistsError, AuthenticationError, MismatchError, AuthUtility, Messages, UserDto, UserSignupDto, UserRoleDto, EmailPasswordDto, DateTimeUtility } from '@pacific.io/common';
 import { LoggerInstance } from '../resources/logger';
 import UserService from '../services/user';
+import { UserCreated } from '../events/user-created-event';
+import { UserCreatedProducer } from '../events/producers/user-created-producer';
 
 export default class AuthController {
     private static LOGGER: Logger = LoggerInstance.logger;
     private static userService: UserService = new UserService();
-
-    public static index(req: Request, res: Response, next: NextFunction): void {
-        res.json({ message: Messages.SERVICE_LIVE.description, data: null });
-    }
+    private static userCreatedProducer: UserCreatedProducer = new UserCreatedProducer();
 
     public static async login(req: Request, res: Response, next: NextFunction): Promise<void | Response<any>> {
         try {
@@ -47,8 +45,10 @@ export default class AuthController {
             let user: UserDto | null = await AuthController.userService.getByEmail(email);
             if (!user) {
                 const hashedPassword: string = await AuthUtility.hashPassword(password);
-                const userDto: UserDto = new UserDto(firstName, lastName, email, hashedPassword, 1, false, true, moment().format('YYYY-DD-MM HH:mm:ss'), moment().format('YYYY-DD-MM HH:mm:ss'), 0, 0);
+                const userDto: UserDto = new UserDto(firstName, lastName, email, hashedPassword, 1, false, true, DateTimeUtility.getCurrentDateTime(), DateTimeUtility.getCurrentDateTime(), 0, 0);
                 user = await AuthController.userService.create(userDto);
+                const event: UserCreated = new UserCreated(user);
+                await AuthController.userCreatedProducer.publish(event);
                 return res.status(201).json({ message: Messages.USER_CREATED.description, data: user });
             }
             return next(new ExistsError('User', 'User Already Exists'));

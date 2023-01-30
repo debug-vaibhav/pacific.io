@@ -1,4 +1,4 @@
-import { Events } from '../events/events';
+import { Events } from './events';
 import { Event } from '../models/interfaces/event';
 
 export interface JobUpdatedEvent extends Event {

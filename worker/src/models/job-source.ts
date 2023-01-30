@@ -1,6 +1,6 @@
 import { Model, Optional, DataTypes } from 'sequelize';
-import { JobSourceInterface } from '@pacific.io/common';
 import { DatabaseInstance } from '../resources/database';
+import { JobSourceInterface } from '@pacific.io/common';
 
 type JobSourceCreationAttributes = Optional<JobSourceInterface, 'id'>;
 
@@ -61,7 +61,6 @@ class JobSource extends Model<JobSourceInterface, JobSourceCreationAttributes> i
             },
             {
                 tableName: 'job_source',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

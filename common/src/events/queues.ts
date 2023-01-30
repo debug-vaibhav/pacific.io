@@ -10,5 +10,8 @@ export enum Queues {
     JobStopped = 'pacific.io.queue.worker-job:stopped',
     SourceCreated = 'pacific.io.queue.worker-source:created',
     SourceDeleted = 'pacific.io.queue.worker-source:deleted',
-    SourceUpdated = 'pacific.io.queue.worker-job:updated',
+    SourceUpdated = 'pacific.io.queue.worker-source:updated',
+    UserCreated = 'pacific.io.queue.worker-user:created',
+    UserDeleted = 'pacific.io.queue.worker-user:deleted',
+    UserUpdated = 'pacific.io.queue.worker-user:updated',
 }

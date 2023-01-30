@@ -1,6 +1,6 @@
 import { Model, Optional, DataTypes } from 'sequelize';
 import { DatabaseInstance } from '../resources/database';
-import { JobSchedulerInterface } from '@pacific.io/common';
+import { JobSchedulerInterface, JobStatus } from '@pacific.io/common';
 
 type JobSchedulerCreationAttributes = Optional<JobSchedulerInterface, 'id'>;
 
@@ -31,12 +31,25 @@ class JobScheduler extends Model<JobSchedulerInterface, JobSchedulerCreationAttr
                 },
                 status: {
                     field: 'status',
-                    type: DataTypes.STRING(20),
+                    type: DataTypes.ENUM,
+                    values: [
+                        JobStatus.READY,
+                        JobStatus.RUNNING,
+                        JobStatus.PAUSED,
+                        JobStatus.STOPPED,
+                        JobStatus.KILLED,
+                        JobStatus.RESUMED,
+                        JobStatus.CANCELLED,
+                        JobStatus.SCHEDULED,
+                        JobStatus.SKIPPED,
+                        JobStatus.PICKED,
+                    ],
+                    defaultValue: JobStatus.READY,
                     allowNull: false,
                 },
                 nextExecutionTime: {
                     field: 'next_execution_time',
-                    type: DataTypes.DATE,
+                    type: DataTypes.STRING,
                     allowNull: false,
                 },
                 isDeleted: {
@@ -67,7 +80,6 @@ class JobScheduler extends Model<JobSchedulerInterface, JobSchedulerCreationAttr
             },
             {
                 tableName: 'job_scheduler',
-                schema: 'dbo',
                 timestamps: false,
                 sequelize: DatabaseInstance.connection,
             }

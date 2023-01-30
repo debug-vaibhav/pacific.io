@@ -58,6 +58,17 @@ export default class SourceController {
         }
     }
 
+    public static async deleteAll(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const rows = await SourceController.sourceService.deleteAll();
+            const event: SourceDeleted = new SourceDeleted(rows);
+            await SourceController.sourceDeletedProducer.publish(event);
+            res.json({ message: 'Datasources deleted successfully', data: rows });
+        } catch (error) {
+            next(new DeleteError('Source', error));
+        }
+    }
+
     public static async deleteById(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const sourceDto: SourceDto | null = await SourceController.sourceService.deleteById(req.params.id);

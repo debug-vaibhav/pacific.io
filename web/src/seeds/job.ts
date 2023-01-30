@@ -1,15 +1,15 @@
-import moment from 'moment';
 import { Logger } from 'winston';
-import { Errors } from '@pacific.io/common';
+import { Errors, JobDto, DateTimeUtility } from '@pacific.io/common';
 import { LoggerInstance } from '../resources/logger';
-import Job from '../models/dao/job';
-import JobDto from '../models/dto/job';
+import Job from '../models/job';
 
 export default class JobSeeder {
     private static LOGGER: Logger = LoggerInstance.logger;
 
     public static async seed(): Promise<void> {
         try {
+            await Job.initialize();
+            await Job.sync({ alter: true });
             const userDtos: JobDto[] = [
                 new JobDto(
                     'MySQL data job',
@@ -17,8 +17,8 @@ export default class JobSeeder {
                     'Asia/Kolkata',
                     '0 0 12 1/1 * ? *',
                     'SELECT * FROM dbo.users',
-                    moment().format('YYYY-DD-MM HH:mm:ss'),
-                    moment().format('YYYY-DD-MM HH:mm:ss'),
+                    DateTimeUtility.getCurrentDateTime(),
+                    DateTimeUtility.getCurrentDateTime(),
                     0,
                     0,
                     true
@@ -29,8 +29,8 @@ export default class JobSeeder {
                     'Asia/Kolkata',
                     '0 0 12 1/1 * ? *',
                     'SELECT * FROM dbo.users',
-                    moment().format('YYYY-DD-MM HH:mm:ss'),
-                    moment().format('YYYY-DD-MM HH:mm:ss'),
+                    DateTimeUtility.getCurrentDateTime(),
+                    DateTimeUtility.getCurrentDateTime(),
                     0,
                     0,
                     true

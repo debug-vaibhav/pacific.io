@@ -1,6 +1,9 @@
 import { Logger } from 'winston';
 import { LoggerInstance } from '../resources/logger';
 import { RabbitMQInstance } from '../resources/rabbitmq';
+import UserCreatedConsumer from '../events/consumers/user-created-consumer';
+import UserUpdatedConsumer from '../events/consumers/user-updated-consumer';
+import UserDeletedConsumer from '../events/consumers/user-deleted-consumer';
 import SourceCreatedConsumer from '../events/consumers/source-created-consumer';
 import SourceUpdatedConsumer from '../events/consumers/source-updated-consumer';
 import SourceDeletedConsumer from '../events/consumers/source-deleted-consumer';
@@ -17,6 +20,9 @@ import JobStoppedConsumer from '../events/consumers/job-stopped-consumer';
 export default class Consumers {
     private static LOGGER: Logger = LoggerInstance.logger;
 
+    private static userCreatedConsumer = new UserCreatedConsumer(RabbitMQInstance);
+    private static userUpdatedConsumer = new UserUpdatedConsumer(RabbitMQInstance);
+    private static userDeletedConsumer = new UserDeletedConsumer(RabbitMQInstance);
     private static sourceCreatedConsumer = new SourceCreatedConsumer(RabbitMQInstance);
     private static sourceUpdatedConsumer = new SourceUpdatedConsumer(RabbitMQInstance);
     private static sourceDeletedConsumer = new SourceDeletedConsumer(RabbitMQInstance);
@@ -31,6 +37,9 @@ export default class Consumers {
     private static jobStoppedConsumer = new JobStoppedConsumer(RabbitMQInstance);
 
     static start() {
+        Consumers.userCreatedConsumer.consume();
+        Consumers.userUpdatedConsumer.consume();
+        Consumers.userDeletedConsumer.consume();
         Consumers.sourceCreatedConsumer.consume();
         Consumers.sourceUpdatedConsumer.consume();
         Consumers.sourceDeletedConsumer.consume();
